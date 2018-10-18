@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta name="force-rendering" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>earth-token</title>
+		<script src="js/jquery-2.1.4.min.js"></script>
+
+	</head>
+	<body>
+	支持跨域设置<br />
+通过 token 获取到的信息 : {ERR_MSG=token 是空}<br />
+支持跨域设置<br />
+jwt = eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1NDI1NjIzMzEsInVzZXJuYW1lIjoia2V2aW4ifQ._HRP10NqE122lsTziAN7h5C_REHkrFDNZICDBauRjIWqM_3DKEJIR1mN5XgjqyW8hqd0hazuhIZNNhmS_8Rm7w<br />
+支持跨域设置<br />
+通过 token 获取到的信息 : {ERR_MSG=token 是空}<br />
+支持跨域设置<br />
+通过 token 获取到的信息 : {ERR_MSG=token 解析错误，该请求不适合使用 jwt 解析}<br />
+支持跨域设置<br />
+key = exp; value = 1542562331<br />
+key = username; value = kevin<br />
+通过 token 获取到的信息 : {username=kevin}<br />
+	<br />
+		<button onclick="toLogin()">点击登录</button>
+		<input id="token" />
+		<br />
+		<button onclick="getInfo()">点击获取用户信息</button>
+		<br />
+		<script>
+			function toLogin(){
+				$.ajax({
+					url:'http://127.0.0.1:4455/auth',
+					type:'GET',
+					data:{username: 'kevin', password: '123'},
+					success:function(res){
+						console.log(res);
+						if(res.code == 200){
+							$("#token").val(res.token);
+						}
+					}
+				})
+			}
+			function getInfo(){
+				var token = $("#token").val();
+				$.ajax({
+					header:{},
+					url:'http://127.0.0.1:4455/user',
+					type:'GET',
+					data:{token: token},
+					success:function(res){
+						console.log(res);
+					}
+				})
+			}
+		</script>
+	</body>
+</html>
